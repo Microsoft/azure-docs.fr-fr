@@ -121,7 +121,7 @@ Vous pouvez maintenant référencer cette clé que vous avez créée ou téléch
 
 Pour afficher l’URI de cette clé, tapez :
 
-    $Key.key.kid
+    $key.kid
 
 Pour ajouter un secret dans le coffre, c'est-à-dire un mot de passe nommé SQLPassword avec la valeur Pa$$w0rd dans Azure Key Vault, commencez par convertir la valeur Pa$$w0rd en chaîne sécurisée en tapant ce qui suit :
 
