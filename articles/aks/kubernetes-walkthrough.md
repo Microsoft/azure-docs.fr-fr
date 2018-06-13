@@ -1,6 +1,6 @@
 ---
-title: 'Démarrage rapide : Cluster Azure Kubernetes pour Linux'
-description: Découvrez rapidement comment créer un cluster Kubernetes pour des conteneurs Linux dans ACS avec Azure CLI.
+title: 'Démarrage rapide : Grappe Azure Kubernetes pour Linux'
+description: Découvrez rapidement comment créer une grappe Kubernetes pour des conteneurs Linux dans ACS avec Azure CLI.
 services: container-service
 author: neilpeterson
 manager: jeconnoc
@@ -15,9 +15,9 @@ ms.translationtype: HT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 05/11/2018
 ---
-# <a name="quickstart-deploy-an-azure-kubernetes-service-aks-cluster"></a>Guide de démarrage rapide : déployer un cluster Azure Kubernetes Service (AKS)
+# <a name="quickstart-deploy-an-azure-kubernetes-service-aks-cluster"></a>Guide de démarrage rapide : déployer une grappe Azure Kubernetes Service (AKS)
 
-Dans ce guide de démarrage rapide, un cluster AKS est déployé à l’aide de l’interface de ligne de commande Azure. Une application de plusieurs conteneurs composée d’un serveur web frontal et d’une instance Redis est alors exécutée sur le cluster. Ceci fait, l’application est accessible via internet.
+Dans ce guide de démarrage rapide, une grappe AKS est déployé à l’aide de l’interface de ligne de commande Azure. Une application de plusieurs conteneurs composée d’un serveur web frontal et d’une instance Redis est alors exécutée sur le cluster. Ceci fait, l’application est accessible via internet.
 
 ![Image de la navigation vers Azure Vote](media/container-service-kubernetes-walkthrough/azure-vote.png)
 
@@ -38,7 +38,7 @@ az provider register -n Microsoft.Compute
 az provider register -n Microsoft.ContainerService
 ```
 
-Une fois celui-ci inscrit, vous êtes prêt à créer un cluster Kubernetes avec AKS.
+Une fois celui-ci inscrit, vous êtes prêt à créer une grappe Kubernetes avec AKS.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -66,19 +66,19 @@ Output:
 }
 ```
 
-## <a name="create-aks-cluster"></a>Créer un cluster ACS
+## <a name="create-aks-cluster"></a>Créer une grappe ACS
 
-Utilisez la commande [az aks create][az-aks-create] pour créer un cluster AKS. L’exemple suivant crée un cluster à un nœud nommé *myAKSCluster*.
+Utilisez la commande [az aks create][az-aks-create] pour créer une grappe AKS. L’exemple suivant crée un nœud de grappe nommé *myAKSCluster*.
 
 ```azurecli-interactive
 az aks create --resource-group myResourceGroup --name myAKSCluster --node-count 1 --generate-ssh-keys
 ```
 
-Au bout de quelques minutes, la commande se termine et retourne des informations formatées JSON sur le cluster.
+Au bout de quelques minutes, la commande se termine et retourne des informations formatées JSON sur la grappe.
 
-## <a name="connect-to-the-cluster"></a>Connexion au cluster
+## <a name="connect-to-the-cluster"></a>Connexion à la grappe
 
-Pour gérer un cluster Kubernetes, utilisez [kubectl][kubectl], le client de ligne de commande Kubernetes.
+Pour gérer une grappe Kubernetes, utilisez [kubectl][kubectl], le client de ligne de commande Kubernetes.
 
 Si vous utilisez Azure Cloud Shell, l’outil kubectl est déjà installé. Pour l’installer en local, utilisez la commande [az aks install-cli][az-aks-install-cli].
 
@@ -93,7 +93,7 @@ Pour configurer kubectl afin qu’il se connecte à votre cluster Kubernetes, ut
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
 ```
 
-Pour vérifier la connexion à votre cluster, utilisez la commande [kubectl get][kubectl-get] pour retourner une liste des nœuds du cluster. Notez que cela peut mettre quelques minutes à apparaître.
+Pour vérifier la connexion à votre grappe, utilisez la commande [kubectl get][kubectl-get] pour retourner une liste des nœuds de la grappe. Notez que cela peut mettre quelques minutes à apparaître.
 
 ```azurecli-interactive
 kubectl get nodes
@@ -108,7 +108,7 @@ k8s-myAKSCluster-36346190-0   Ready     agent     2m        v1.7.7
 
 ## <a name="run-the-application"></a>Exécution de l'application
 
-Un fichier manifeste Kubernetes définit un état souhaité pour le cluster, incluant les images conteneur à exécuter. Dans cet exemple, un manifeste est utilisé afin de créer tous les objets nécessaires pour l’exécution de l’application Azure Vote. Cela inclut deux [déploiements Kubernetes][kubernetes-deployment], un pour les applications Azure Vote Python et l’autre pour une instance Redis. En outre, deux [services Kubernetes][kubernetes-service] sont créés, un service interne pour l’instance Redis et un service externe pour l’accès à l’application Azure Vote à partir d’Internet.
+Un fichier manifeste Kubernetes définit un état souhaité pour la grappe, incluant les images conteneur à exécuter. Dans cet exemple, un manifeste est utilisé afin de créer tous les objets nécessaires pour l’exécution de l’application Azure Vote. Cela inclut deux [déploiements Kubernetes][kubernetes-deployment], un pour les applications Azure Vote Python et l’autre pour une instance Redis. En outre, deux [services Kubernetes][kubernetes-service] sont créés, un service interne pour l’instance Redis et un service externe pour l’accès à l’application Azure Vote à partir d’Internet.
 
 Créez un fichier nommé `azure-vote.yaml` et copiez-y le code YAML suivant. Si vous travaillez dans Azure Cloud Shell, vous pouvez créer ce fichier à l’aide de vi ou de Nano comme si vous travailliez sur un système virtuel ou physique.
 
@@ -217,7 +217,7 @@ Accédez maintenant à l’adresse IP externe pour voir l’application Azure Vo
 
 ## <a name="delete-cluster"></a>Supprimer un cluster
 
-Lorsque vous n’avez plus besoin du cluster, utilisez la commande [az group delete][az-group-delete] pour supprimer le groupe de ressources, le service conteneur et toutes les ressources associées.
+Lorsque vous n’avez plus besoin de la grappe, utilisez la commande [az group delete][az-group-delete] pour supprimer le groupe de ressources, le service conteneur et toutes les ressources associées.
 
 ```azurecli-interactive
 az group delete --name myResourceGroup --yes --no-wait
@@ -231,9 +231,9 @@ Dans ce guide de démarrage rapide, les images de conteneur, créées au préala
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce Démarrage rapide, vous avez déployé un cluster Kubernetes dans lequel vous avez déployé une application de plusieurs conteneurs.
+Dans ce Démarrage rapide, vous avez déployé une grappe Kubernetes dans lequel vous avez déployé une application de plusieurs conteneurs.
 
-Pour en savoir plus sur ACS et parcourir le code complet de l’exemple de déploiement, passez au didacticiel sur le cluster Kubernetes.
+Pour en savoir plus sur ACS et parcourir le code complet de l’exemple de déploiement, passez au didacticiel sur les grappes Kubernetes.
 
 > [!div class="nextstepaction"]
 > [Didacticiel ACS][aks-tutorial]
