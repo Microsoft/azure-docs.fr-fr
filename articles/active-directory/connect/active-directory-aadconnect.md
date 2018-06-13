@@ -40,7 +40,7 @@ Azure AD Connect intègre vos répertoires locaux à Azure Active Directory. Cel
 ## <a name="why-use-azure-ad-connect"></a>Pourquoi utiliser Azure AD Connect
 L’intégration de vos annuaires locaux avec Azure AD améliore la productivité de vos utilisateurs en leur fournissant une identité commune pour accéder aux ressources cloud et locales. Les utilisateurs et les organisations bénéficient des avantages suivants :
 
-* Les utilisateurs peuvent utiliser une identité unique pour accéder aux applications locales et aux services cloud comme Office 365.
+* Les utilisateurs peuvent utiliser une identité unique pour accéder aux applications locales et aux services de cloud comme Office 365.
 * Outil unique offrant une expérience de déploiement simple pour la synchronisation et la connexion.
 * Fournit les fonctionnalités les plus récentes pour vos scénarios. Azure AD Connect remplace les versions antérieures des outils d’intégration d’identité tels que DirSync et Azure AD Sync. Pour plus d’informations, consultez [Identité hybride : Comparaison des outils d’intégration d’annuaire](../active-directory-hybrid-identity-design-considerations-tools-comparison.md).
 
