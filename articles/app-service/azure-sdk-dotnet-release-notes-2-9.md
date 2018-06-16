@@ -25,7 +25,7 @@ Cette rubrique comprend des notes de publication relatives aux versions 2.9 et 
 
 ## <a name="azure-sdk-for-net-296-release-summary"></a>Synthèse de publication du Kit SDK Azure pour .NET 2.9.6
 
-Date de lancement : 16/11/2016
+Date de sortie : 16/11/2016
  
 Dans cette version, aucune modification importante n’a été apportée au Kit SDK Azure 2.9. Par ailleurs, aucun processus de mise à niveau n’est requis pour tirer parti de ce SDK avec des projets existants de service cloud.
 
