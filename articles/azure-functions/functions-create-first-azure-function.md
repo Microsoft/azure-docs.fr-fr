@@ -45,7 +45,7 @@ Créez ensuite une fonction dans la nouvelle Function App.
 
 ## <a name="create-function"></a>Créer une fonction déclenchée via HTTP
 
-1. Développez votre nouvelle Function App, puis cliquez sur le bouton **+** en regard de **Fonctions**.
+1. Développez votre nouvelle Function App, puis cliquez sur le bouton **+** à côté de **Fonctions**.
 
 2.  Sur la page **Commencez rapidement**, sélectionnez **WebHook + API**, **choisissez le langage** de votre fonction, puis cliquez sur **Créer cette fonction**. 
    
