@@ -82,7 +82,7 @@ ssh azureuser@13.72.77.9
 
 ## <a name="install-nodejs"></a>Installer Node.js
 
-[Node.js](https://nodejs.org/en/) est un runtime JavaScript reposant sur le moteur JavaScript V8 de Chrome. Node.js est utilisé dans ce didacticiel pour configurer les itinéraires Express et les contrôleurs AngularJS.
+[Node.js](https://nodejs.org/fr/) est un runtime JavaScript reposant sur le moteur JavaScript V8 de Chrome. Node.js est utilisé dans ce didacticiel pour configurer les itinéraires Express et les contrôleurs AngularJS.
 
 Sur la machine virtuelle, installez Node.js à l’aide de l’interpréteur de commandes Bash que vous avez ouvert avec SSH.
 
