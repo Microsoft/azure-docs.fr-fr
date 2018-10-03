@@ -37,7 +37,7 @@ Pour plus d’informations, consultez la [documentation de référence sur le d�
 Le fichier zip que vous utilisez pour le déploiement Push doit contenir tous les fichiers nécessaires à l’exécution de votre fonction.
 
 >[!IMPORTANT]
-> Quand vous utilisez le déploiement zip, tous les fichiers d’un déploiement existant qui ne se trouvent pas dans le fichier zip sont supprimés de votre application de fonction.  
+> Quand vous utilisez le déploiement zip, tous les fichiers d’un déploiement existant qui ne se trouvent pas dans le fichier zip sont supprimés de votre application de fonction. 
 
 [!INCLUDE [functions-folder-structure](../../includes/functions-folder-structure.md)]
 
