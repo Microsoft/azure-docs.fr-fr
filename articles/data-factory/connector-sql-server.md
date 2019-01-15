@@ -21,7 +21,7 @@ ms.lasthandoff: 11/09/2018
 ms.locfileid: "51345207"
 ---
 # <a name="copy-data-to-and-from-sql-server-using-azure-data-factory"></a>Copier des données vers et depuis SQL Server à l’aide d’Azure Data Factory
-> [!div class="op_single_selector" title1="Select the version of Data Factory service you are using:"]
+> [!div class="op_single_selector" title1="Válassza ki az Ön által használt Data Factory szolgáltatás verzióját:"]
 > * [Version 1](v1/data-factory-sqlserver-connector.md)
 > * [Version actuelle](connector-sql-server.md)
 
