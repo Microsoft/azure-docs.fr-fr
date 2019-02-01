@@ -4,7 +4,7 @@ Bienvenue dans la [documentation](https://docs.microsoft.com/azure) open source 
 
 ## <a name="getting-started"></a>Bien démarrer
 
-Le fait de contribuer à la documentation open source ne se résume pas à des mises à jour, il s’agit aussi de nous informer de problèmes éventuels. Pour en savoir plus, lisez notre [guide de contribution](.github/CONTRIBUTING.md).
+Le fait de contribuer à la documentation open source ne se résume pas à des mises à jour, il s’agit aussi de nous informer de problèmes éventuels. Pour en savoir plus, lisez notre [guide de contribution](https://docs.microsoft.com/fr-fr/contribute/).
 
 ### <a name="prerequisites"></a>Prérequis
 
@@ -26,7 +26,7 @@ Suivez les instructions fournies dans [Installer des outils de création de cont
 
 ## <a name="license"></a>Licence
 
-Reportez-vous à [LICENSE](.github/LICENSE), [LICENSE-CODE](.github/LICENSE-CODE) et [ThirdPartyNotices](.github/ThirdPartyNotices.md) pour toutes les informations de licence.
+Reportez-vous à [LICENSE](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/LICENSE), [LICENSE-CODE](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/LICENSE-CODEE) et [ThirdPartyNotices](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/ThirdPartyNotices.md) pour toutes les informations de licence.
 
 ## <a name="code-of-conduct"></a>Code de conduite
 
