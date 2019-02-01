@@ -26,7 +26,7 @@ Suivez les instructions fournies dans [Installer des outils de création de cont
 
 ## <a name="license"></a>Licence
 
-Reportez-vous à [LICENSE](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/LICENSE), [LICENSE-CODE](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/LICENSE-CODEE) et [ThirdPartyNotices](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/ThirdPartyNotices.md) pour toutes les informations de licence.
+Reportez-vous à [LICENSE](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/LICENSE), [LICENSE-CODE](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/LICENSE-CODE) et [ThirdPartyNotices](https://github.com/MicrosoftDocs/azure-docs/blob/master/.github/ThirdPartyNotices.md) pour toutes les informations de licence.
 
 ## <a name="code-of-conduct"></a>Code de conduite
 
