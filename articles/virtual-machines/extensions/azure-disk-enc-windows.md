@@ -81,7 +81,7 @@ Azure Disk Encryption doit être connecté à Internet pour accéder à Active D
 | ---- | ---- | ---- |
 | apiVersion | 2015-06-15 | date |
 | publisher | Microsoft.Azure.Security | string |
-| Type | AzureDiskEncryptionForWindows| string |
+| type | AzureDiskEncryptionForWindows| string |
 | typeHandlerVersion | 1.0, 1.1, 2.2 (VMSS) | int |
 | (facultatif) AADClientID | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | GUID | 
 | (facultatif) AADClientSecret | password | string |
@@ -92,6 +92,7 @@ Azure Disk Encryption doit être connecté à Internet pour accéder à Active D
 | KeyVaultResourceId | uri de ressource | string |
 | KekVaultResourceId | uri de ressource | string |
 | KeyVaultURL | url | string |
+| (facultatif) Passphrase | password | string | 
 | SequenceVersion | uniqueidentifier | string |
 | VolumeType | Système d’exploitation, données, tout | string |
 
