@@ -60,7 +60,7 @@ Les propriétés prises en charge pour le service lié Oracle sont les suivantes
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| Type | La propriété type doit être définie sur **Oracle**. | OUI |
+| type | La propriété type doit être définie sur **Oracle**. | OUI |
 | connectionString | Spécifie les informations requises pour se connecter à l’instance Oracle Database. <br/>Marquez ce champ comme SecureString pour le stocker de façon sécurisée dans Data Factory. Vous pouvez également définir un mot de passe dans Azure Key Vault et extraire la configuration `password` de la chaîne de connexion. Pour plus d'informations, reportez-vous aux exemples suivants et à l'article [Stocker des informations d'identification dans Azure Key Vault](store-credentials-in-key-vault.md). <br><br>**Type de connexion pris en charge** : Vous pouvez utiliser le **SID Oracle** ou le **nom du service Oracle** pour identifier votre base de données :<br>- Si vous utilisez le SID : `Host=<host>;Port=<port>;Sid=<sid>;User Id=<username>;Password=<password>;`<br>- Si vous utilisez le nom du service : `Host=<host>;Port=<port>;ServiceName=<servicename>;User Id=<username>;Password=<password>;` | OUI |
 | connectVia | Le [runtime d’intégration](concepts-integration-runtime.md) à utiliser pour se connecter à la banque de données. Vous pouvez utiliser un runtime d’intégration auto-hébergé ou un runtime d’intégration Azure (si votre banque de données est accessible publiquement). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non |
 
@@ -165,7 +165,7 @@ Pour copier des données depuis et vers Oracle, affectez la valeur **OracleTable
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| Type | La propriété type du jeu de données doit être définie sur **OracleTable**. | OUI |
+| type | La propriété type du jeu de données doit être définie sur **OracleTable**. | OUI |
 | tableName |Nom de la table dans la base de données Oracle à laquelle le service lié fait référence. | OUI |
 
 **Exemple :**
@@ -201,14 +201,14 @@ Pour copier des données d’Oracle, définissez le type de source dans l’acti
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| Type | La propriété type de la source d’activité de copie doit être définie sur **OracleSource**. | OUI |
+| type | La propriété type de la source d’activité de copie doit être définie sur **OracleSource**. | OUI |
 | oracleReaderQuery | Utiliser la requête SQL personnalisée pour lire les données. Par exemple `"SELECT * FROM MyTable"`.<br>Lorsque vous activez la charge partitionnée, vous devez utiliser le(s) paramètre(s) de partition correspondant(s) dans votre requête. Consultez des exemples dans la section [Copie en parallèle à partir d’Oracle](#parallel-copy-from-oracle). | Non |
 | partitionOptions | Spécifie les options de partitionnement des données utilisées pour charger des données à partir d’Oracle. <br>Les valeurs autorisées sont : **None** (valeur par défaut), **PhysicalPartitionsOfTable** et **DynamicRange**.<br>Lorsque l’option de partition est activée (valeur autre que « None »), configurez également le paramètre **[`parallelCopies`](copy-activity-performance.md#parallel-copy)** sur l’activité de copie (4, par exemple), ce qui détermine le degré de parallélisme pour charger simultanément des données à partir de la base de données Oracle. | Non |
 | partitionSettings | Spécifiez le groupe de paramètres pour le partitionnement des données. <br>S’applique lorsque l’option de partition est autre que `None`. | Non |
 | partitionNames | La liste des partitions physiques qui doivent être copiées. <br>S’applique lorsque l’option de partition est `PhysicalPartitionsOfTable`. Si vous utilisez une requête pour récupérer des données sources, utilisez `?AdfTabularPartitionName` dans la clause WHERE. Consultez des exemples dans la section [Copie en parallèle à partir d’Oracle](#parallel-copy-from-oracle). | Non |
 | partitionColumnName | Spécifiez le nom de la colonne source **dans type entier** qu’utilisera le partitionnement par plages de valeurs pour la copie en parallèle. S’il n’est pas spécifié, la clé primaire de la table sera automatiquement détectée et utilisée en tant que colonne de partition. <br>S’applique lorsque de l’option de partition est `DynamicRange`. Si vous utilisez une requête pour récupérer des données sources, utilisez `?AdfRangePartitionColumnName` dans la clause WHERE. Consultez des exemples dans la section [Copie en parallèle à partir d’Oracle](#parallel-copy-from-oracle). | Non |
 | partitionUpperBound | Valeur maximale de la colonne de partition à partir de laquelle copier des données. <br>S’applique lorsque de l’option de partition est `DynamicRange`. Si vous utilisez une requête pour récupérer des données sources, utilisez `?AdfRangePartitionUpbound` dans la clause WHERE. Consultez des exemples dans la section [Copie en parallèle à partir d’Oracle](#parallel-copy-from-oracle). | Non |
-| PartitionLowerBound | Valeur minimale de la colonne de partition à partir de laquelle copier des données. <br>S’applique lorsque de l’option de partition est `DynamicRange`. Si vous utilisez une requête pour récupérer des données sources, utilisez `?AdfRangePartitionLowbound` dans la clause WHERE. Consultez des exemples dans la section [Copie en parallèle à partir d’Oracle](#parallel-copy-from-oracle). | Non |
+| partitionLowerBound | Valeur minimale de la colonne de partition à partir de laquelle copier des données. <br>S’applique lorsque de l’option de partition est `DynamicRange`. Si vous utilisez une requête pour récupérer des données sources, utilisez `?AdfRangePartitionLowbound` dans la clause WHERE. Consultez des exemples dans la section [Copie en parallèle à partir d’Oracle](#parallel-copy-from-oracle). | Non |
 
 **Exemple : copie de données à l’aide de la requête de base sans partition**
 
