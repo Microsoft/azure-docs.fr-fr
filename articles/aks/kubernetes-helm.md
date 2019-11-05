@@ -16,7 +16,7 @@ ms.locfileid: "70305271"
 ---
 # <a name="install-applications-with-helm-in-azure-kubernetes-service-aks"></a>Installer des applications avec Helm dans Azure Kubernetes Service (AKS)
 
-[Helm][helm] est un outil d’empaquetage open source qui vous aide à installer et à gérer le cycle de vie d’applications Kubernetes. À l’instar de gestionnaires de package Linux tels que *APT* et *Yum*, Helm sert à gérer les graphiques Kubernetes, qui sont des packages de ressources Kubernetes préconfigurés.
+[Helm][helm] est un outil d’empaquetage open source qui vous aide à installer et à gérer le cycle de vie d’applications Kubernetes. À l’instar de gestionnaires de package Linux tels que *APT* et *Yum*, Helm sert à gérer des packages d'application (charts), qui sont des definitions de ressources Kubernetes préconfigurés.
 
 Cet article vous montre comment configurer et utiliser Helm dans un cluster Kubernetes AKS.
 
@@ -27,7 +27,7 @@ Cet article suppose que vous avez un cluster AKS existant. Si vous avez besoin d
 Vous devez aussi avoir installé l’interface CLI Helm, qui est le client s’exécutant sur votre système de développement. Il vous permet de démarrer, arrêter et gérer les applications avec Helm. Si vous utilisez Azure Cloud Shell, l’interface CLI Helm est déjà installée. Pour obtenir les instructions d’installation sur votre plateforme local, consultez [Installing Helm][helm-install] (Installation de Helm).
 
 > [!IMPORTANT]
-> Helm est prévu pour s’exécuter sur des nœuds Linux. Si vous avez des nœuds Windows Server dans votre cluster, vous devez veiller à ce que l’exécution des pods Helm soit planifiée uniquement sur des nœuds Linux. Vous devez aussi veiller à ce que les graphiques Helm que vous installez s’exécutent sur les bons nœuds. Les commandes figurant dans cet article utilisent [node-selectors][k8s-node-selector] pour garantir que les pods sont planifiés sur les nœuds adéquats, mais il se peut que certains graphiques Helm n’exposent pas de sélecteur de nœud. Vous pouvez aussi envisager d’utiliser d’autres options sur votre cluster, comme des [teintes][taints] (« taints »).
+> Helm est prévu pour s’exécuter sur des nœuds Linux. Si vous avez des nœuds Windows Server dans votre cluster, vous devez veiller à ce que l’exécution des pods Helm soit planifiée uniquement sur des nœuds Linux. Vous devez aussi veiller à ce que les charts Helm que vous installez s’exécutent sur les bons nœuds. Les commandes figurant dans cet article utilisent [node-selectors][k8s-node-selector] pour garantir que les pods sont planifiés sur les nœuds adéquats, mais il se peut que certains charts Helm n’exposent pas de sélecteur de nœud. Vous pouvez aussi envisager d’utiliser d’autres options sur votre cluster, comme des [teintes][taints] (« taints »).
 
 ## <a name="create-a-service-account"></a>Créer un compte de service
 
@@ -92,15 +92,15 @@ helm init \
     --node-selectors "beta.kubernetes.io/os=linux"
 ```
 
-## <a name="find-helm-charts"></a>Rechercher des graphiques Helm
+## <a name="find-helm-charts"></a>Rechercher des charts Helm
 
-Les graphiques Helm servent à déployer des applications dans un cluster Kubernetes. Pour rechercher des graphiques Helm précréés, vous devez utiliser la commande [helm search][helm-search] :
+Les charts Helm servent à déployer des applications dans un cluster Kubernetes. Pour rechercher des charts Helm précréés, vous devez utiliser la commande [helm search][helm-search] :
 
 ```console
 helm search
 ```
 
-La sortie condensée suivante montre certains des graphiques Helm disponibles :
+La sortie condensée suivante montre certains des charts Helm disponibles :
 
 ```
 $ helm search
@@ -135,7 +135,7 @@ stable/datadog                 0.18.0           6.3.0        DataDog Agent
 ...
 ```
 
-Pour mettre à jour la liste des graphiques, utilisez la commande [helm repo update][helm-repo-update]. L’exemple suivant montre une mise à jour de référentiel réussie :
+Pour mettre à jour la liste des charts, utilisez la commande [helm repo update][helm-repo-update]. L’exemple suivant montre une mise à jour de référentiel réussie :
 
 ```console
 $ helm repo update
@@ -146,9 +146,9 @@ Hold tight while we grab the latest from your chart repositories...
 Update Complete.
 ```
 
-## <a name="run-helm-charts"></a>Exécuter des graphiques Helm
+## <a name="run-helm-charts"></a>Exécuter des charts Helm
 
-Pour installer des graphiques avec Helm, utilisez la commande [helm install][helm-install] et spécifiez le nom du graphique à installer. Pour vous montrer comment se déroule l’installation d’un graphique Helm, nous allons effectuer un déploiement nginx de base à l’aide d’un graphique Helm. Si vous avez configuré TLS/SSL, ajoutez le paramètre `--tls` pour utiliser le certificat client Helm.
+Pour installer des charts avec Helm, utilisez la commande [helm install][helm-install] et spécifiez le nom du chart à installer. Pour vous montrer comment se déroule l’installation d’un chart Helm, nous allons effectuer un déploiement nginx de base à l’aide d’un chart Helm. Si vous avez configuré TLS/SSL, ajoutez le paramètre `--tls` pour utiliser le certificat client Helm.
 
 ```console
 helm install stable/nginx-ingress \
@@ -156,7 +156,7 @@ helm install stable/nginx-ingress \
     --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
 ```
 
-La sortie condensée suivante montre l’état du déploiement des ressources Kubernetes créées par le graphique Helm :
+La sortie condensée suivante montre l’état du déploiement des ressources Kubernetes créées par le chart Helm :
 
 ```
 $ helm install stable/nginx-ingress --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
@@ -198,7 +198,7 @@ flailing-alpaca   1         Thu May 23 12:55:21 2019    DEPLOYED    nginx-ingres
 
 ## <a name="clean-up-resources"></a>Supprimer des ressources
 
-Quand vous déployez un graphique Helm, une série de ressources Kubernetes est créée. Ces ressources incluent des pods, des déploiements et des services. Pour nettoyer ces ressources, utilisez la commande `helm delete` et spécifiez le nom de votre version, tel que fourni par la commande `helm list` précédente. L’exemple suivant supprime la version nommée *flailing-alpaca* :
+Quand vous déployez un chart Helm, une série de ressources Kubernetes est créée. Ces ressources incluent des pods, des déploiements et des services. Pour nettoyer ces ressources, utilisez la commande `helm delete` et spécifiez le nom de votre version, tel que fourni par la commande `helm list` précédente. L’exemple suivant supprime la version nommée *flailing-alpaca* :
 
 ```console
 $ helm delete flailing-alpaca
