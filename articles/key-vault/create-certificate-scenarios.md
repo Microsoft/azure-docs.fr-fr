@@ -20,8 +20,6 @@ ms.locfileid: "78199731"
 # <a name="monitor-and-manage-certificate-creation"></a>Surveiller et gérer la création de certificats
 S’applique à : Azure
 
-Les 
-
 Scénarios/Opérations décrits dans cet article :
 
 - Demander un certificat Key Vault avec un émetteur pris en charge
