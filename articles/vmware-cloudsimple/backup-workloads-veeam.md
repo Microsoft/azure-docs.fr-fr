@@ -194,7 +194,7 @@ Connectez votre réseau virtuel au cloud privé en suivant les instructions de [
 
 ### <a name="configure-azure-blob-storage-for-long-term-data-retention"></a>Configurer le stockage d’objets blob Azure pour la conservation des données à long terme
 
-1. Créez un compte de stockage à usage général (GPv2) de type standard et un conteneur d’objets blob, comme indiqué dans la vidéo de Mircosoft [Prise en main du stockage Azure](https://azure.microsoft.com/resources/videos/get-started-with-azure-storage).
+1. Créez un compte de stockage à usage général (GPv2) de type standard et un conteneur d’objets blob, comme indiqué dans la vidéo de Microsoft [Prise en main du stockage Azure](https://azure.microsoft.com/resources/videos/get-started-with-azure-storage).
 2. Créez un conteneur de stockage Azure, comme indiqué dans la référence [Créer un conteneur](https://docs.microsoft.com/rest/api/storageservices/create-container).
 2. Téléchargez `azcopy` l’utilitaire de ligne de commande pour Linux à partir de Microsoft. Vous pouvez utilisez les commandes suivantes dans l’interpréteur de commandes Bash de CentOS 7.5.
 
