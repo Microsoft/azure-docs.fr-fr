@@ -80,7 +80,7 @@ Dans Azure AD DS, les performances et fonctionnalités disponibles sont basées 
 
 | Nom de la référence (SKU)   | Nombre maximal d'objets | Fréquence de sauvegarde | Nombre maximal d’approbations de forêts sortantes |
 |------------|----------------------|------------------|----|
-| Standard   | Illimité            | Tous les 7 jours     | 0  |
+| Standard   | Illimité            | Tous les 5 jours     | 0  |
 | Entreprise | Illimité            | Tous les 3 jours     | 5  |
 | Premium    | Illimité            | Quotidien            | 10 |
 
