@@ -22,7 +22,7 @@ Azure DevOps Starter offre une expérience simplifiée dans laquelle vous pouvez
 De plus, DevOps Starter :
 * Crée automatiquement des ressources Azure, comme une base de données dans Azure SQL Database.
 * Crée et configure un pipeline de mise en production dans Azure Pipelines qui inclut un pipeline de build pour CI
-* Configurer un pipeline de mise en production pour CD 
+* Configure un pipeline de mise en production pour CD 
 * Crée une ressource Azure Application Insights pour la supervision
 
 Ce didacticiel présente les procédures suivantes :
@@ -33,7 +33,7 @@ Ce didacticiel présente les procédures suivantes :
 > * Examiner le pipeline CI
 > * Examiner le pipeline CD
 > * Valider les modifications apportées à Azure Repos et les déployer automatiquement dans Azure
-> * Connexion à Azure SQL Database 
+> * Etablir la connexion à Azure SQL Database 
 > * Nettoyer les ressources
 
 ## <a name="prerequisites"></a>Prérequis
@@ -64,9 +64,9 @@ DevOps Starter crée un pipeline CI/CD dans Azure Pipelines. Vous pouvez créer 
 
 1. Indiquez un nom pour votre projet Azure DevOps. 
 
-1. Sélectionnez les services de votre abonnement Azure. Si vous le souhaitez, pour afficher d’autres paramètres de configuration Azure et identifier le nom d’utilisateur dans la section **Détails de connexion au serveur de base de données**, vous pouvez sélectionner **Modifier**. Enregistrez le nom d’utilisateur pour le réutiliser dans les étapes suivantes de ce tutoriel. Si vous effectuez cette étape facultative, quittez la zone de configuration Azure avant de sélectionner **Terminé**.
+1. Sélectionnez les services de votre abonnement Azure. Si vous le souhaitez, pour afficher d’autres paramètres de configuration Azure et identifier le nom d’utilisateur dans la section **Détails de connexion au serveur de base de données**, vous pouvez modifier le nom d’utilisateur pour le réutiliser dans les étapes suivantes de ce tutoriel. Si vous effectuez cette étape facultative, quittez la zone de configuration Azure avant de sélectionner **OK**.
  
-1. Sélectionnez **Terminé**. Après quelques minutes, le tableau de bord DevOps Starter s’ouvre dans le portail Azure. Vous pouvez également accéder au tableau de bord directement à partir de **Toutes les ressources** dans le portail Azure. À droite, sélectionnez **Parcourir** pour voir votre application en cours d’exécution.
+1. Sélectionnez **Terminer**. Après quelques minutes, le tableau de bord DevOps Starter s’ouvre dans le portail Azure. Vous pouvez également accéder au tableau de bord directement à partir de **Toutes les ressources** dans le portail Azure. À droite, sélectionnez **Parcourir** pour voir votre application en cours d’exécution.
     
 ## <a name="examine-the-ci-pipeline"></a>Examiner le pipeline CI
 
@@ -82,7 +82,7 @@ DevOps Starter configure automatiquement un pipeline CI/CD complet dans Azure Re
 
 1. En haut du pipeline de build, sélectionnez le nom du pipeline de build.
 
-1. Remplacez le nom de votre pipeline de build par un nom plus descriptif, sélectionnez **Enregistrer et mettre en file d’attente**, puis sélectionnez **Enregistrer**.
+1. Remplacez le nom de votre pipeline de build par un nom plus descriptif, sélectionnez **Enregistrer et mettre en file d’attente**, puis sélectionnez **Enregistrer et exécuter**.
 
 1. Sous le nom de votre pipeline de build, sélectionnez **Historique**. Ce volet montre une piste d’audit des modifications que vous avez apportées récemment à la build. Azure Pipelines suit les modifications apportées au pipeline de build et permet de comparer les versions.
 
@@ -184,7 +184,7 @@ Si vous le souhaitez, vous pouvez modifier ces pipelines de build et de mise en 
 > * Examiner le pipeline CI
 > * Examiner le pipeline CD
 > * Valider les modifications apportées à Azure Repos et les déployer automatiquement dans Azure
-> * Connexion à Azure SQL Database 
+> * Etablir la connexion à Azure SQL Database 
 > * Nettoyer les ressources
 
 Pour en savoir plus sur le pipeline CI/CD, consultez :
