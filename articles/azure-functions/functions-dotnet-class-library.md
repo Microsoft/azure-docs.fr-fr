@@ -63,7 +63,7 @@ Ce répertoire correspond à ce qui est déployé dans votre application de fonc
 
 ## <a name="methods-recognized-as-functions"></a>Méthodes reconnues en tant que fonctions
 
-Dans une bibliothèque de classes, une fonction est une méthode statique avec un attribut `FunctionName` et un attribut de déclencheur, comme illustré dans l’exemple suivant :
+Dans une bibliothèque de classes, une fonction est une méthode statique avec un attribut `FunctionName` et un paramètre ayant un attribut de déclencheur, comme illustré dans l’exemple suivant :
 
 ```csharp
 public static class SimpleExample
@@ -137,7 +137,7 @@ public static class BindingExpressionsExample
 
 Le processus de build crée un fichier *function.json* dans un dossier de fonction du dossier de build. Comme indiqué précédemment, ce fichier n’est pas destiné à être modifié directement. Vous ne pouvez pas modifier la configuration des liaisons ni désactiver la fonction en modifiant ce fichier. 
 
-L’objectif de ce fichier est de fournir au contrôleur de mise à l’échelle les informations à utiliser pour les [ décisions de mise à l’échelle affectant le plan Consommation](functions-scale.md#how-the-consumption-and-premium-plans-work). C’est pourquoi le fichier ne contient pas de liaisons d’entrée ou de sortie, mais uniquement des informations de déclencheur.
+L’objectif de ce fichier est de fournir au contrôleur de mise à l’échelle les informations à utiliser pour les [décisions de mise à l’échelle affectant le plan Consommation](functions-scale.md#how-the-consumption-and-premium-plans-work). C’est pourquoi le fichier ne contient pas de liaisons d’entrée ou de sortie, mais uniquement des informations de déclencheur.
 
 Le fichier *function.json* généré inclut une propriété `configurationSource` qui indique au runtime d’utiliser les attributs .NET pour les liaisons, au lieu de la configuration *function.json*. Voici un exemple :
 
