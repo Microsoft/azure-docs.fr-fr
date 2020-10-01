@@ -33,7 +33,7 @@ La capture et la publication des erreurs sont essentielles pour superviser l’i
 
 Les déclencheurs suivants prennent en charge les nouvelles tentatives intégrées :
 
-* [stockage d’objets blob Azure](../articles/azure-functions/functions-bindings-storage-blob.md)
+* [Stockage d’objets blob Azure](../articles/azure-functions/functions-bindings-storage-blob.md)
 * [Stockage File d’attente Azure](../articles/azure-functions/functions-bindings-storage-queue.md)
 * [Azure Service Bus (file d’attente/rubrique)](../articles/azure-functions/functions-bindings-service-bus.md)
 
