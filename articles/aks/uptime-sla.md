@@ -31,8 +31,6 @@ Le contrat SLA de durée de fonctionnement est disponible dans les régions publ
 
 ## <a name="limitations"></a>Limites
 
-* Les clusters privés ne sont actuellement pas pris en charge.
-
 ## <a name="sla-terms-and-conditions"></a>Conditions générales des contrats SLA
 
 Le contrat SLA de durée de fonctionnement est une fonctionnalité payante et activée par cluster. Le tarif du contrat SLA de durée de fonctionnement est déterminé par le nombre de clusters discrets, et non par la taille des clusters individuels. Consultez [Détails de la tarification du contrat SLA de durée de fonctionnement](https://azure.microsoft.com/pricing/details/kubernetes-service/) pour en savoir plus.
